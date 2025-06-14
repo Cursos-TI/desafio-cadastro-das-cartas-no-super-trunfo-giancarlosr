@@ -14,7 +14,7 @@ struct CartasSuperTrunfo //armazenar dados das cartas
     int Pontos; //número de pontos turísticos
     float densidade;
     float percapita;
-    float superPoder; // campo para super poder
+    float superPoder;
 };
 
 void exibirDiferenca(const char* atributo, float val1, float val2, int isInt) {
@@ -62,26 +62,26 @@ int main(){
 
         printf("Quantos pontos turisticos tem a cidade: \n");
         scanf("%d", &cartas[i].Pontos);
-
+        //calcular densidade
         if (cartas[i].Area > 0) {
             cartas[i].densidade = cartas[i].Populacao / cartas[i].Area;
         } else {
             cartas[i].densidade = 0;
         }
-
+        //calcular per capits
         if (cartas[i].Populacao > 0) {
             cartas[i].percapita = cartas[i].PIB * 1e9 / cartas[i].Populacao;
         } else {
             cartas[i].percapita = 0;
         }
-        
+        //quanto menos a densidade maior o poder
         float densidadePeso = 0.0f;
         if (cartas[i].densidade > 0) {
             densidadePeso = 1.0f / (cartas[i].densidade + 0.0001f);
         } else {
             densidadePeso = 1000000.0f;
         }
-
+        //calcular Super poder
         cartas[i].superPoder = (float)cartas[i].Populacao + cartas[i].Area + cartas[i].PIB + (float)cartas[i].Pontos + densidadePeso;
 
         while (getchar() != '\n');
